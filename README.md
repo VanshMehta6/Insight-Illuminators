@@ -82,6 +82,3 @@ Designers to refine the glassmorphism UI
 
 📄 License
 MIT License - built with ❤️ for educational transformation
-
-📄 License
-MIT License - built with ❤️ for educational transformation
