@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrations - Insight Illuminators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .integrations-hero {
+            text-align: center;
+            padding: 120px 6% 60px;
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.05));
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 60px;
+        }
+        
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .integration-card {
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s;
+        }
+        
+        .integration-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .integration-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: var(--gradient-secondary);
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--dark-bg);
+        }
+        
+        .integration-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+        
+        .status-live {
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+        }
+        
+        .status-beta {
+            background: rgba(255,170,0,0.2);
+            color: #ffaa00;
+        }
+        
+        .status-coming {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-tertiary);
+        }
+        
+        .integration-features {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+        }
+        
+        .integration-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .integration-features li i {
+            color: var(--secondary-blue);
+            width: 20px;
+        }
+        
+        .integration-cta {
+            margin-top: 20px;
+        }
+        
+        .voice-feature {
+            margin: 80px 0;
+            padding: 60px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.15));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .voice-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: cover;
+        }
+        
+        .voice-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 992px) {
+            .voice-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .voice-demo {
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .voice-wave {
+            height: 100px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wave-bar {
+            position: absolute;
+            bottom: 0;
+            width: 10px;
+            background: var(--secondary-blue);
+            border-radius: 5px 5px 0 0;
+            animation: wave 1.5s infinite ease-in-out;
+        }
+        
+        @keyframes wave {
+            0%, 100% { height: 30%; }
+            50% { height: 90%; }
+        }
+        
+        .api-section {
+            margin-top: 80px;
+        }
+        
+        .api-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .api-feature {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .api-feature i {
+            font-size: 2.5rem;
+            color: var(--secondary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .setup-steps {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        
+        .setup-step {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+        
+        .step-visual {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: rgba(0,245,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-blue);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            margin-bottom: 10px;
+            color: var(--secondary-blue);
+        }
+        
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .code-snippet {
+            background: rgba(0,0,0,0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow-x: auto;
+        }
+        
+        .code-comment {
+            color: #6a9955;
+        }
+        
+        .code-keyword {
+            color: #569cd6;
+        }
+        
+        .code-string {
+            color: #ce9178;
+        }
+        
+        .security-section {
+            margin-top: 80px;
+        }
+        
+        .security-badges {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .security-badge {
+            padding: 15px 25px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .security-badge i {
+            color: var(--secondary-blue);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            Insight Illuminators
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tour.html">Product</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="integrations.html" class="active">Integrations</a>
+            <a href="blog.html">Blog</a>
+            <a href="#" class="btn-login">Login</a>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="mobile-menu glass">
+        <a href="index.html">Home</a>
+        <a href="tour.html">Product</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="teachers.html">Teachers</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="integrations.html" class="active">Integrations</a>
+        <a href="blog.html">Blog</a>
+        <a href="#" class="btn-login">Login</a>
+    </div>
+
+    <section class="integrations-hero">
+        <h1>Seamless Integrations</h1>
+        <p class="section-subtitle">Works with the tools you already use. No workflow disruption.</p>
+        <p>From Google Classroom to handwritten PDFs, Insight Illuminators fits into your existing teaching ecosystem.</p>
+    </section>
+
+    <section>
+        <div class="integration-grid">
+            <!-- Google Classroom -->
+            <div class="integration-card glass">
+                <div class="integration-status status-live">Live</div>
+                <div class="integration-icon">
+                    <i class="fab fa-google"></i>
+                </div>
+                <h3>Google Classroom</h3>
+                <p>Direct integration with assignments, student submissions, and gradebook</p>
+                
+                <ul class="integration-features">
+                    <li><i class="fas fa-check"></i> Auto-import assignments</li>
+                    <li><i class="fas fa-check"></i> Sync fracture reports</li>
+                    <li><i class="fas fa-check"></i> One-click grade export</li>
+                    <li><i class="fas fa-check"></i> Real-time notifications</li>
+                </ul>
+                
+                <div class="integration-cta">
+                    <button class="cta secondary" style="width: 100%;">
+                        <i class="fab fa-google"></i>
+                        Connect Google Classroom
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Microsoft Teams -->
+            <div class="integration-card glass">
+                <div class="integration-status status-live">Live</div>
+                <div class="integration-icon">
+                    <i class="fab fa-microsoft"></i>
+                </div>
+                <h3>Microsoft Teams</h3>
+                <p>Full integration for schools using Microsoft 365 ecosystem</p>
+                
+                <ul class="integration-features">
+                    <li><i class="fas fa-check"></i> Teams app installation</li>
+                    <li><i class="fas fa-check"></i> Assignment tab integration</li>
+                    <li><i class="fas fa-check"></i> Azure AD single sign-on</li>
+                    <li><i class="fas fa-check"></i> SharePoint document sync</li>
+                </ul>
+                
+                <div class="integration-cta">
+                    <button class="cta secondary" style="width: 100%;">
+                        <i class="fab fa-microsoft"></i>
+                        Add to Teams
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Canvas LMS -->
+            <div class="integration-card glass">
+                <div class="integration-status status-live">Live</div>
+                <div class="integration-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Canvas LMS</h3>
+                <p>LTI 1.3 integration with full gradebook and assignment sync</p>
+                
+                <ul class="integration-features">
+                    <li><i class="fas fa-check"></i> LTI 1.3 certified</li>
+                    <li><i class="fas fa-check"></i> Grade passback</li>
+                    <li><i class="fas fa-check"></i> Course roster sync</li>
+                    <li><i class="fas fa-check"></i> Deep linking support</li>
+                </ul>
+                
+                <div class="integration-cta">
+                    <button class="cta secondary" style="width: 100%;">
+                        <i class="fas fa-plug"></i>
+                        Install LTI Tool
+                    </button>
+                </div>
+            </div>
+            
+            <!-- PDF/Photos Upload -->
+            <div class="integration-card glass">
+                <div class="integration-status status-live">Live</div>
+                <div class="integration-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3>PDF & Photos</h3>
+                <p>Upload handwritten work, diagrams, or typed solutions</p>
+                
+                <ul class="integration-features">
+                    <li><i class="fas fa-check"></i> Handwriting recognition</li>
+                    <li><i class="fas fa-check"></i> Diagram analysis</li>
+                    <li><i class="fas fa-check"></i> Multi-page PDF support</li>
+                    <li><i class="fas fa-check"></i> Camera capture on mobile</li>
+                </ul>
+                
+                <div class="integration-cta">
+                    <button class="cta" style="width: 100%; background: var(--gradient-secondary); color: var(--dark-bg);">
+                        <i class="fas fa-upload"></i>
+                        Try Upload Demo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Voice Analysis -->
+            <div class="integration-card glass">
+                <div class="integration-status status-beta">Beta</div>
+                <div class="integration-icon">
+                    <i class="fas fa-microphone"></i>
+                </div>
+                <h3>Voice Reasoning</h3>
+                <p>Students explain reasoning aloud. AI transcribes and analyzes.</p>
+                
+                <ul class="integration-features">
+                    <li><i class="fas fa-check"></i> Real-time transcription</li>
+                    <li><i class="fas fa-check"></i> 50+ language support</li>
+                    <li><i class="fas fa-check"></i> Accent adaptation</li>
+                    <li><i class="fas fa-check"></i> Speech emotion analysis</li>
+                </ul>
+                
+                <div class="integration-cta">
+                    <button class="cta secondary" style="width: 100%;">
+                        <i class="fas fa-microphone"></i>
+                        Try Voice Mode
+                    </button>
+                </div>
+            </div>
+            
+            <!-- API Access -->
+            <div class="integration-card glass">
+                <div class="integration-status status-live">Live</div>
+                <div class="integration-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>API Access</h3>
+                <p>Build custom integrations with our REST API</p>
+                
+                <ul class="integration-features">
+                    <li><i class="fas fa-check"></i> RESTful JSON API</li>
+                    <li><i class="fas fa-check"></i> Webhook support</li>
+                    <li><i class="fas fa-check"></i> Rate limiting</li>
+                    <li><i class="fas fa-check"></i> Comprehensive docs</li>
+                </ul>
+                
+                <div class="integration-cta">
+                    <button class="cta secondary" style="width: 100%;">
+                        <i class="fas fa-book"></i>
+                        View API Docs
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="voice-feature">
+        <h2 style="text-align: center; margin-bottom: 40px;">Voice Analysis: Our VEDA Expertise Shines</h2>
+        
+        <div class="voice-content">
+            <div>
+                <h3>Why Voice Matters</h3>
+                <p>For dyslexic students, English language learners, or those who think better aloud, voice reasoning removes writing barriers and reveals true understanding.</p>
+                
+                <div style="margin-top: 30px;">
+                    <div class="case-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h4>Natural Reasoning Flow</h4>
+                            <p>Students explain naturally, without the cognitive load of writing</p>
+                        </div>
+                    </div>
+                    
+                    <div class="case-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div>
+                            <h4>Multilingual Support</h4>
+                            <p>Analyze reasoning in Hindi, Marathi, Tamil, and 50+ other languages</p>
+                        </div>
+                    </div>
+                    
+                    <div class="case-feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h4>Confidence Analysis</h4>
+                            <p>Detect hesitation, uncertainty, or confidence in vocal patterns</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="voice-demo">
+                <h4><i class="fas fa-microphone"></i> Live Voice Demo</h4>
+                <p>Click to record a student reasoning explanation:</p>
+                
+                <div class="voice-wave" id="voice-wave">
+                    <!-- Wave bars will be generated by JS -->
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="cta secondary" style="flex: 1;" onclick="startRecording()">
+                        <i class="fas fa-microphone"></i>
+                        Start Recording
+                    </button>
+                    <button class="cta" style="flex: 1; background: var(--gradient-secondary); color: var(--dark-bg);" onclick="analyzeVoice()">
+                        <i class="fas fa-bolt"></i>
+                        Analyze Voice
+                    </button>
+                </div>
+                
+                <div id="voice-result" style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.5); border-radius: 8px; display: none;">
+                    <p><strong>AI Transcription:</strong> "The acceleration is 5 meters per second squared because force divided by mass..."</p>
+                    <p><strong>Fracture Detection:</strong> Missing unit justification at step 3</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="api-section">
+        <h2>API & Developer Tools</h2>
+        <p class="section-subtitle">Build custom integrations with our comprehensive API</p>
+        
+        <div class="api-features">
+            <div class="api-feature glass">
+                <i class="fas fa-server"></i>
+                <h3>REST API</h3>
+                <p>Full RESTful API with JSON responses and comprehensive documentation</p>
+            </div>
+            
+            <div class="api-feature glass">
+                <i class="fas fa-bolt"></i>
+                <h3>Webhooks</h3>
+                <p>Real-time notifications for analysis completion, new submissions, and more</p>
+            </div>
+            
+            <div class="api-feature glass">
+                <i class="fas fa-shield-alt"></i>
+                <h3>OAuth 2.0</h3>
+                <p>Secure authentication with role-based access control</p>
+            </div>
+            
+            <div class="api-feature glass">
+                <i class="fas fa-tachometer-alt"></i>
+                <h3>Rate Limiting</h3>
+                <p>Generous rate limits with clear documentation</p>
+            </div>
+        </div>
+        
+        <div class="setup-steps">
+            <h3 style="text-align: center; margin-bottom: 40px;">Quick Start: Connect in 5 Minutes</h3>
+            
+            <div class="setup-step">
+                <div class="step-visual">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="step-content">
+                    <h4>1. Get API Key</h4>
+                    <p>Generate your API key from the dashboard settings</p>
+                    <div class="code-snippet">
+                        <span class="code-comment"># Navigate to Settings → API</span><br>
+                        <span class="code-keyword">const</span> API_KEY = <span class="code-string">'ill_sk_live_1234567890abcdef'</span>;
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setup-step">
+                <div class="step-visual">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="step-content">
+                    <h4>2. Make Your First Request</h4>
+                    <p>Submit student reasoning for analysis</p>
+                    <div class="code-snippet">
+                        <span class="code-keyword">const</span> response = <span class="code-keyword">await</span> fetch(<span class="code-string">'https://api.insightilluminators.com/v1/analyze'</span>, {<br>
+                        &nbsp;&nbsp;method: <span class="code-string">'POST'</span>,<br>
+                        &nbsp;&nbsp;headers: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Authorization'</span>: <span class="code-string">`Bearer ${API_KEY}`</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Content-Type'</span>: <span class="code-string">'application/json'</span><br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;body: JSON.stringify({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;reasoning: <span class="code-string">"F=ma so a = F/m = 10/2 = 5"</span><br>
+                        &nbsp;&nbsp;})<br>
+                        });
+                    </div>
+                </div>
+            </div>
+            
+            <div class="setup-step">
+                <div class="step-visual">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="step-content">
+                    <h4>3. Receive Fracture Analysis</h4>
+                    <p>Get detailed fracture mapping and next actions</p>
+                    <div class="code-snippet">
+                        {<br>
+                        &nbsp;&nbsp;<span class="code-string">"fractures"</span>: [{<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"step"</span>: 3,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"type"</span>: <span class="code-string">"unit_blindness"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"severity"</span>: 0.8<br>
+                        &nbsp;&nbsp;}],<br>
+                        &nbsp;&nbsp;<span class="code-string">"next_action"</span>: <span class="code-string">"Ask: What units must acceleration carry?"</span><br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="security-section">
+        <h2>Security & Compliance</h2>
+        <p class="section-subtitle">Enterprise-grade security for educational institutions</p>
+        
+        <div class="security-badges">
+            <div class="security-badge">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <strong>FERPA Compliant</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary);">Student data protection</div>
+                </div>
+            </div>
+            
+            <div class="security-badge">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <strong>GDPR Ready</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary);">EU data protection</div>
+                </div>
+            </div>
+            
+            <div class="security-badge">
+                <i class="fas fa-server"></i>
+                <div>
+                    <strong>ISO 27001</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary);">Information security</div>
+                </div>
+            </div>
+            
+            <div class="security-badge">
+                <i class="fas fa-encryption"></i>
+                <div>
+                    <strong>AES-256 Encryption</strong>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary);">Data at rest & in transit</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="max-width: 800px; margin: 40px auto; text-align: center;">
+            <p>All integrations support SSO (SAML 2.0), role-based access control, and audit logging. School plans include custom data retention policies and dedicated security review.</p>
+            <button class="cta secondary" style="margin-top: 20px;">
+                <i class="fas fa-file-contract"></i>
+                View Security Whitepaper
+            </button>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container glass">
+            <h2>Ready to Integrate?</h2>
+            <p>Start your free pilot and connect Insight Illuminators to your existing tools</p>
+            <div class="cta-buttons">
+                <button class="cta" onclick="window.location.href='pricing.html'">
+                    <i class="fas fa-rocket"></i>
+                    Start Free Pilot
+                </button>
+                <button class="cta secondary" onclick="window.location.href='tour.html'">
+                    <i class="fas fa-code"></i>
+                    View API Documentation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    Insight Illuminators
+                </div>
+                <p class="footer-tagline">Made in Mumbai · Serving 12K+ students globally</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="tour.html">Tour</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="use-cases.html">Use Cases</a>
+                <a href="teachers.html">Teachers</a>
+                <a href="integrations.html">Integrations</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="blog.html">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Insight Illuminators · Exposing Hidden Thought Fractures · Precision cognitive diagnostics © 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Generate wave bars for voice demo
+        const voiceWave = document.getElementById('voice-wave');
+        for (let i = 0; i < 40; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'wave-bar';
+            bar.style.left = `${i * 12}px`;
+            bar.style.height = `${Math.random() * 80 + 20}%`;
+            bar.style.animationDelay = `${Math.random() * 1.5}s`;
+            voiceWave.appendChild(bar);
+        }
+        
+        // Voice recording simulation
+        function startRecording() {
+            const waveBars = document.querySelectorAll('.wave-bar');
+            waveBars.forEach(bar => {
+                bar.style.animationPlayState = 'running';
+                bar.style.height = `${Math.random() * 80 + 20}%`;
+            });
+            
+            // Show recording UI
+            document.querySelector('.voice-demo button:nth-child(1)').innerHTML = '<i class="fas fa-stop"></i> Stop Recording';
+            document.querySelector('.voice-demo button:nth-child(1)').onclick = stopRecording;
+        }
+        
+        function stopRecording() {
+            const waveBars = document.querySelectorAll('.wave-bar');
+            waveBars.forEach(bar => {
+                bar.style.animationPlayState = 'paused';
+            });
+            
+            // Reset UI
+            document.querySelector('.voice-demo button:nth-child(1)').innerHTML = '<i class="fas fa-microphone"></i> Start Recording';
+            document.querySelector('.voice-demo button:nth-child(1)').onclick = startRecording;
+        }
+        
+        function analyzeVoice() {
+            const resultDiv = document.getElementById('voice-result');
+            resultDiv.style.display = 'block';
+            
+            gsap.from(resultDiv, {
+                duration: 0.5,
+                opacity: 0,
+                y: 20,
+                ease: 'power3.out'
+            });
+        }
+        
+        // Animate integration cards on scroll
+        gsap.utils.toArray('.integration-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    once: true
+                },
+                duration: 0.8,
+                y: 40,
+                opacity: 0,
+                delay: i * 0.1,
+                ease: 'power3.out'
+            });
+        });
+        
+        // Animate voice feature section
+        gsap.from('.voice-feature', {
+            scrollTrigger: {
+                trigger: '.voice-feature',
+                start: 'top 80%',
+                once: true
+            },
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+        
+        // Animate API features
+        gsap.utils.toArray('.api-feature').forEach((feature, i) => {
+            gsap.from(feature, {
+                scrollTrigger: {
+                    trigger: feature,
+                    start: 'top 90%',
+                    once: true
+                },
+                duration: 0.6,
+                scale: 0.9,
+                opacity: 0,
+                delay: i * 0.1,
+                ease: 'back.out(1.2)'
+            });
+        });
+        
+        // Animate setup steps
+        gsap.utils.toArray('.setup-step').forEach((step, i) => {
+            gsap.from(step, {
+                scrollTrigger: {
+                    trigger: step,
+                    start: 'top 95%',
+                    once: true
+                },
+                duration: 0.7,
+                x: -30,
+                opacity: 0,
+                delay: i * 0.2,
+                ease: 'power3.out'
+            });
+        });
+    </script>
+</body>
+</html>

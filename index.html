@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insight Illuminators - Exposing Hidden Thought Fractures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            Insight Illuminators
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tour.html">Product</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="blog.html">Blog</a>
+            <a href="#" class="btn-login">Login</a>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu glass">
+        <a href="index.html">Home</a>
+        <a href="tour.html">Product</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="teachers.html">Teachers</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="blog.html">Blog</a>
+        <a href="#" class="btn-login">Login</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>Insight Illuminators</h1>
+            <p class="hero-tagline">Exposing Hidden Thought Fractures</p>
+            <p>We don't teach answers. We reveal where thinking secretly breaks. Precision cognitive diagnostics for judges who care about real reasoning depth.</p>
+            <p class="hero-description">Every student explanation hides invisible fractures. Insight Illuminators surfaces those micro-breaks, labels the misconception, and fires one perfect diagnostic question to repair understanding fast.</p>
+            <div class="hero-cta-wrapper">
+                <button class="cta" onclick="scrollToId('demo')">
+                    <i class="fas fa-bolt"></i>
+                    Run FREE Gap Scan
+                </button>
+                <button class="cta secondary" onclick="window.location.href='tour.html'">
+                    <i class="fas fa-eye"></i>
+                    See Product Tour
+                </button>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Trusted By Strip -->
+    <section class="trusted-strip glass">
+        <div class="trusted-inner">
+            <span>Trusted By:</span>
+            <div class="trusted-logos">
+                <span class="trusted-logo">MIT Media Lab</span>
+                <span class="trusted-logo">Khan Academy Labs</span>
+                <span class="trusted-logo">Singapore Math</span>
+                <span class="trusted-logo">500+ Schools Piloting</span>
+                <span class="trusted-logo">Featured at BETT 2026</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats">
+        <div class="stats-container">
+            <div class="stat">
+                <div class="stat-number" data-target="12">0</div>
+                <div class="stat-label">K+ Students Analyzed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-target="2.8">0</div>
+                <div class="stat-label">x Faster Learning</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-target="91">0</div>
+                <div class="stat-label">% Teacher Retention</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" data-target="94">0</div>
+                <div class="stat-label">% Gap Detection Accuracy</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Classroom Results -->
+    <section id="testimonials">
+        <h2>Real Classroom Results</h2>
+        <p class="section-subtitle">See how teachers worldwide are transforming student understanding</p>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card glass">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Physics Teacher</h4>
+                        <p>Mumbai International School</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Finally see exactly where students lose the thread. 3x faster concept mastery with precise fracture detection."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <div class="testimonial-card glass">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Competition Judge</h4>
+                        <p>National STEM Challenge</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Most impressive reasoning analysis I've seen in 10+ years judging. The misconception naming is revolutionary."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <div class="testimonial-card glass">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Math Coach</h4>
+                        <p>STEM Excellence Program</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Names misconceptions like 'unit blindness' that I never had language for. Students finally understand their own thinking gaps."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <div class="testimonial-card glass">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>School Principal</h4>
+                        <p>Innovation Academy</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Students actually enjoy the feedback. It feels like coaching, not grading. A true game changer for formative assessment."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Core Cognitive Engine</h2>
+        <p class="section-subtitle">Precision diagnostics that map student reasoning at molecular level</p>
+
+        <div class="features-layout">
+            <div class="feature-tabs-container glass">
+                <div class="feature-tabs">
+                    <button class="feature-tab-btn active" data-feature="gap">
+                        <i class="fas fa-location-arrow"></i>
+                        Thought-Gap Detector
+                    </button>
+                    <button class="feature-tab-btn" data-feature="micro">
+                        <i class="fas fa-microscope"></i>
+                        Micro-Diagnostic Q
+                    </button>
+                    <button class="feature-tab-btn" data-feature="mis">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        Misconception Radar
+                    </button>
+                    <button class="feature-tab-btn" data-feature="next">
+                        <i class="fas fa-compass"></i>
+                        Next Best Action
+                    </button>
+                </div>
+
+                <div id="feature-panel">
+                    <p class="feature-tag">Mode: Precision Thought-Gap Detector</p>
+                    <p class="feature-detail-title">See The Exact Step Where Thinking Snaps</p>
+                    <p class="feature-detail-body">
+                        The engine overlays the student's reasoning chain with an ideal expert chain and flags the exact transition where logic silently breaks. No generic "wrong"—only surgical insight into the missing mental step.
+                    </p>
+                    <div class="feature-pills">
+                        <span class="feature-pill">Step-wise reasoning trace</span>
+                        <span class="feature-pill">Transition fracture mapping</span>
+                        <span class="feature-pill">Confidence vs justification check</span>
+                    </div>
+                    <div class="feature-actions">
+                        <button onclick="scrollToId('demo')">
+                            <i class="fas fa-bolt"></i>
+                            Run Live Gap Scan
+                        </button>
+                        <button onclick="window.location.href='tour.html'">
+                            <i class="fas fa-film"></i>
+                            Watch 30s Judge Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card glass">
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <span class="feature-chip">Flagship</span>
+                    </div>
+                    <h3>Thought-Gap Detector</h3>
+                    <p>Tracks each mental step, then highlights where the student's logic silently jumps.</p>
+                    <div class="feature-chip-row">
+                        <span class="feature-chip">Chain comparison</span>
+                        <span class="feature-chip">Transition pinpointing</span>
+                    </div>
+                    <button onclick="scrollToId('demo')">
+                        Try Gap Scan <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="feature-card glass">
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <span class="feature-chip">High Impact</span>
+                    </div>
+                    <h3>Micro-Diagnostic Question</h3>
+                    <p>Generates exactly one tiny question that slices into understanding.</p>
+                    <div class="feature-chip-row">
+                        <span class="feature-chip">1-shot probe</span>
+                        <span class="feature-chip">Adaptive difficulty</span>
+                    </div>
+                    <button onclick="scrollToId('demo')">
+                        Generate Probe <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+
+                <div class="feature-card glass">
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-triangle-exclamation"></i>
+                        </div>
+                        <span class="feature-chip">Human-like</span>
+                    </div>
+                    <h3>Misconception Identifier</h3>
+                    <p>Names the error like an expert tutor with pattern recognition.</p>
+                    <div class="feature-chip-row">
+                        <span class="feature-chip">Pattern library</span>
+                        <span class="feature-chip">Domain-aware labels</span>
+                    </div>
+                    <button onclick="scrollToId('demo')">
+                        See Misconception Labels <i class="fas fa-tags"></i>
+                    </button>
+                </div>
+
+                <div class="feature-card glass">
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <span class="feature-chip">Coach Mode</span>
+                    </div>
+                    <h3>Next Best Action Engine</h3>
+                    <p>Chooses a single next move, not a menu of options.</p>
+                    <div class="feature-chip-row">
+                        <span class="feature-chip">Prioritized coaching</span>
+                        <span class="feature-chip">Actionable step</span>
+                    </div>
+                    <button onclick="scrollToId('demo')">
+                        Get Next Move <i class="fas fa-location-arrow"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="engine-strip">
+            <div class="engine-pill">Judge view: crisp fracture reports</div>
+            <div class="engine-pill">Student view: one clear next step</div>
+            <div class="engine-pill">Teacher view: reasoning, not just scores</div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="demo-section">
+        <h2>Live Thought Fracture Demo</h2>
+        <p class="section-subtitle">See your first fracture report in 30 seconds</p>
+        
+        <div class="demo-container glass">
+            <div class="demo-inputs">
+                <div class="demo-input-group">
+                    <label for="student-input"><i class="fas fa-user-graduate"></i> Student Reasoning Input</label>
+                    <textarea id="student-input" placeholder="Type or paste student reasoning... (e.g., 'F=ma so a = F/m = 10/2 = 5, done')"></textarea>
+                </div>
+                
+                <button id="analyze-btn" class="cta" onclick="analyzeGap()">
+                    <i class="fas fa-bolt"></i>
+                    Illuminate Thought Fractures
+                </button>
+                
+                <div class="demo-output-group">
+                    <label for="ai-output"><i class="fas fa-robot"></i> AI Fracture Analysis</label>
+                    <textarea id="ai-output" readonly placeholder="Watch Insight Illuminators dissect the reasoning chain..."></textarea>
+                </div>
+                
+                <div class="demo-labels">
+                    <span><i class="fas fa-circle" style="color: #00ff88;"></i> Real-time gap mapping</span>
+                    <span><i class="fas fa-circle" style="color: #ffaa00;"></i> Misconception pattern check</span>
+                    <span><i class="fas fa-circle" style="color: #667eea;"></i> One-shot micro diagnostic</span>
+                </div>
+            </div>
+            
+            <div class="judge-strip">
+                <div class="judge-tag"><i class="fas fa-gavel"></i> Judge mode: see reasoning depth instantly</div>
+                <div class="judge-tag"><i class="fas fa-user-graduate"></i> Student mode: feels like a coach, not a test</div>
+            </div>
+        </div>
+        
+        <!-- Email Capture Modal (hidden by default) -->
+        <div id="email-modal" class="email-modal glass">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeEmailModal()">&times;</button>
+                <h3><i class="fas fa-envelope"></i> Save Your Fracture Reports</h3>
+                <p>Enter your email to get:</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Free 14-day Pro trial</li>
+                    <li><i class="fas fa-check"></i> Class dashboard access</li>
+                    <li><i class="fas fa-check"></i> PDF export of this analysis</li>
+                </ul>
+                <div class="email-input-group">
+                    <input type="email" id="modal-email" placeholder="Your work email">
+                    <button onclick="submitEmail()">Get Free Trial <i class="fas fa-arrow-right"></i></button>
+                </div>
+                <p class="modal-note">Join 500+ teachers already piloting Insight Illuminators</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container glass">
+            <h2>Ready to Transform Your Classroom?</h2>
+            <p>Get your FREE classroom pilot and start exposing thought fractures today.</p>
+            <div class="cta-buttons">
+                <button class="cta" onclick="window.location.href='pricing.html'">
+                    <i class="fas fa-rocket"></i>
+                    Start Free Pilot
+                </button>
+                <button class="cta secondary" onclick="window.location.href='tour.html'">
+                    <i class="fas fa-play-circle"></i>
+                    Watch Product Tour
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    Insight Illuminators
+                </div>
+                <p class="footer-tagline">Made in Mumbai · Serving 12K+ students globally</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="tour.html">Tour</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="use-cases.html">Use Cases</a>
+                <a href="teachers.html">Teachers</a>
+                <a href="integrations.html">Integrations</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="blog.html">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Insight Illuminators · Exposing Hidden Thought Fractures · Precision cognitive diagnostics © 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Demo - Insight Illuminators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-hero {
+            text-align: center;
+            padding: 120px 6% 60px;
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.05));
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 60px;
+        }
+        
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 25px;
+        }
+        
+        .dashboard-card {
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .card-header i {
+            color: var(--secondary-blue);
+            font-size: 1.2rem;
+        }
+        
+        /* Heatmap Card */
+        .heatmap-card {
+            grid-column: span 8;
+            grid-row: span 2;
+        }
+        
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .heatmap-cell {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-bg);
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: relative;
+            transition: all 0.3s;
+            cursor: help;
+        }
+        
+        .heatmap-cell:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+        
+        .heatmap-legend {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 4px;
+        }
+        
+        /* Misconceptions Card */
+        .misconceptions-card {
+            grid-column: span 4;
+        }
+        
+        .misconception-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        
+        .misconception-item:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(5px);
+        }
+        
+        .misconception-name {
+            font-weight: 500;
+        }
+        
+        .misconception-count {
+            background: rgba(255,107,107,0.2);
+            color: #ff6b6b;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Progress Card */
+        .progress-card {
+            grid-column: span 4;
+        }
+        
+        .progress-radar {
+            width: 100%;
+            height: 250px;
+            margin: 20px 0;
+        }
+        
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .progress-stat {
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .progress-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .progress-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+        }
+        
+        /* Export Card */
+        .export-card {
+            grid-column: span 12;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .export-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .export-btn {
+            padding: 15px 30px;
+            border-radius: 12px;
+            border: 2px solid rgba(0,245,255,0.3);
+            background: rgba(0,245,255,0.1);
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .export-btn:hover {
+            background: rgba(0,245,255,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,245,255,0.2);
+        }
+        
+        .export-btn.featured {
+            background: var(--gradient-secondary);
+            color: var(--dark-bg);
+            border-color: transparent;
+        }
+        
+        /* Mockup Cards */
+        .mockup-section {
+            margin-top: 60px;
+        }
+        
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mockup-card {
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .mockup-header {
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .mockup-content {
+            padding: 20px;
+            background: rgba(0,0,0,0.5);
+            min-height: 200px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .mockup-line {
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            margin-bottom: 8px;
+            border-radius: 999px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .mockup-line.short {
+            width: 70%;
+        }
+        
+        .mockup-line.medium {
+            width: 85%;
+        }
+        
+        .mockup-line.long {
+            width: 95%;
+        }
+        
+        @media (max-width: 1200px) {
+            .heatmap-card {
+                grid-column: span 12;
+            }
+            
+            .misconceptions-card {
+                grid-column: span 6;
+            }
+            
+            .progress-card {
+                grid-column: span 6;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-card {
+                grid-column: span 1 !important;
+            }
+            
+            .heatmap-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            Insight Illuminators
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tour.html">Product</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="blog.html">Blog</a>
+            <a href="#" class="btn-login">Login</a>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="mobile-menu glass">
+        <a href="index.html">Home</a>
+        <a href="tour.html">Product</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="teachers.html">Teachers</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="blog.html">Blog</a>
+        <a href="#" class="btn-login">Login</a>
+    </div>
+
+    <section class="dashboard-hero">
+        <h1>Teacher Dashboard Demo</h1>
+        <p class="section-subtitle">See how Insight Illuminators transforms classroom data into actionable insights</p>
+        <p>Static mockup showing real teacher interface with live data visualization</p>
+    </section>
+
+    <section class="dashboard-section">
+        <div class="dashboard-container">
+            <!-- Class Reasoning Heatmap -->
+            <div class="dashboard-card glass heatmap-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-fire"></i> Class Reasoning Heatmap</h3>
+                    <i class="fas fa-info-circle" title="Which concepts fracture most frequently across your class"></i>
+                </div>
+                <p>Visual representation of where students struggle most. Darker cells indicate higher fracture density.</p>
+                
+                <div class="heatmap-grid">
+                    <!-- Heatmap cells will be generated by JS -->
+                </div>
+                
+                <div class="heatmap-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #00ff88;"></div>
+                        <span>0-20% fractures</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffaa00;"></div>
+                        <span>21-40% fractures</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ff6b6b;"></div>
+                        <span>41-60% fractures</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #cc0000;"></div>
+                        <span>61-100% fractures</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Misconceptions -->
+            <div class="dashboard-card glass misconceptions-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-triangle-exclamation"></i> Top 3 Misconceptions This Week</h3>
+                    <i class="fas fa-calendar-week"></i>
+                </div>
+                <p>Most frequent reasoning fractures detected across all student submissions</p>
+                
+                <div class="misconception-list">
+                    <div class="misconception-item">
+                        <div>
+                            <div class="misconception-name">Unit Blindness</div>
+                            <small style="color: var(--text-tertiary);">Physics - Force calculations</small>
+                        </div>
+                        <div class="misconception-count">47 students</div>
+                    </div>
+                    
+                    <div class="misconception-item">
+                        <div>
+                            <div class="misconception-name">Velocity vs Acceleration Confusion</div>
+                            <small style="color: var(--text-tertiary);">Physics - Kinematics</small>
+                        </div>
+                        <div class="misconception-count">32 students</div>
+                    </div>
+                    
+                    <div class="misconception-item">
+                        <div>
+                            <div class="misconception-name">Sign Convention Flip</div>
+                            <small style="color: var(--text-tertiary);">Math - Vector operations</small>
+                        </div>
+                        <div class="misconception-count">28 students</div>
+                    </div>
+                </div>
+                
+                <button class="cta secondary" style="width: 100%; margin-top: 20px;">
+                    <i class="fas fa-chart-bar"></i>
+                    View Full Report
+                </button>
+            </div>
+
+            <!-- Student Progress Radar -->
+            <div class="dashboard-card glass progress-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-radar"></i> Student Progress Radar</h3>
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <p>Overall class progress across key reasoning dimensions</p>
+                
+                <div class="progress-radar">
+                    <canvas id="progressChart"></canvas>
+                </div>
+                
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <div class="progress-stat-value">94%</div>
+                        <div class="progress-stat-label">Gap Closure Rate</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-value">2.8x</div>
+                        <div class="progress-stat-label">Faster Mastery</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Section -->
+            <div class="dashboard-card glass export-card">
+                <h3><i class="fas fa-file-export"></i> Export Judge-Ready Reports</h3>
+                <p>Generate professional PDF reports for competitions, parent meetings, or administrative review</p>
+                
+                <div class="export-options">
+                    <button class="export-btn">
+                        <i class="fas fa-file-pdf"></i>
+                        Export as PDF
+                    </button>
+                    <button class="export-btn featured">
+                        <i class="fas fa-gavel"></i>
+                        Judge-Ready PDF Report
+                    </button>
+                    <button class="export-btn">
+                        <i class="fas fa-chart-line"></i>
+                        Data Export (CSV)
+                    </button>
+                </div>
+                
+                <p style="margin-top: 20px; color: var(--text-tertiary); font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i> Judge-ready reports include fracture analysis, misconception patterns, and growth metrics
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mockup-section">
+        <h2>Teacher Interface Mockups</h2>
+        <p class="section-subtitle">Screenshot-style glass cards showing actual teacher interface elements</p>
+        
+        <div class="mockup-grid">
+            <div class="mockup-card glass">
+                <div class="mockup-header">
+                    <h4><i class="fas fa-user-graduate"></i> Student Detail View</h4>
+                </div>
+                <div class="mockup-content">
+                    <div class="mockup-line long"></div>
+                    <div class="mockup-line short"></div>
+                    <br>
+                    <div class="mockup-line medium"></div>
+                    <div class="mockup-line long"></div>
+                    <div class="mockup-line short"></div>
+                    <br>
+                    <div style="background: rgba(0,245,255,0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                        <div class="mockup-line short" style="background: #00ff88;"></div>
+                        <div class="mockup-line medium" style="background: #00ff88;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mockup-card glass">
+                <div class="mockup-header">
+                    <h4><i class="fas fa-chart-bar"></i> Analytics Dashboard</h4>
+                </div>
+                <div class="mockup-content">
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <div style="flex: 1; height: 60px; background: rgba(0,245,255,0.2); border-radius: 8px;"></div>
+                        <div style="flex: 1; height: 40px; background: rgba(0,245,255,0.2); border-radius: 8px;"></div>
+                        <div style="flex: 1; height: 80px; background: rgba(0,245,255,0.2); border-radius: 8px;"></div>
+                    </div>
+                    <div class="mockup-line long"></div>
+                    <div class="mockup-line medium"></div>
+                    <div class="mockup-line short"></div>
+                </div>
+            </div>
+            
+            <div class="mockup-card glass">
+                <div class="mockup-header">
+                    <h4><i class="fas fa-cogs"></i> Lesson Planning Tools</h4>
+                </div>
+                <div class="mockup-content">
+                    <div class="mockup-line medium"></div>
+                    <div class="mockup-line long"></div>
+                    <br>
+                    <div style="display: flex; gap: 5px; margin: 10px 0;">
+                        <div style="flex: 1; height: 20px; background: rgba(255,107,107,0.2); border-radius: 4px;"></div>
+                        <div style="flex: 2; height: 20px; background: rgba(255,170,0,0.2); border-radius: 4px;"></div>
+                        <div style="flex: 1; height: 20px; background: rgba(0,245,255,0.2); border-radius: 4px;"></div>
+                    </div>
+                    <div class="mockup-line short"></div>
+                    <div class="mockup-line medium"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container glass">
+            <h2>Ready to Access Your Dashboard?</h2>
+            <p>Start your free pilot and get instant access to class analytics and fracture reports</p>
+            <div class="cta-buttons">
+                <button class="cta" onclick="window.location.href='pricing.html'">
+                    <i class="fas fa-rocket"></i>
+                    Start Free Pilot
+                </button>
+                <button class="cta secondary" onclick="window.location.href='tour.html'">
+                    <i class="fas fa-play-circle"></i>
+                    Watch Product Tour
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    Insight Illuminators
+                </div>
+                <p class="footer-tagline">Made in Mumbai · Serving 12K+ students globally</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="tour.html">Tour</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="use-cases.html">Use Cases</a>
+                <a href="teachers.html">Teachers</a>
+                <a href="integrations.html">Integrations</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="blog.html">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Insight Illuminators · Exposing Hidden Thought Fractures · Precision cognitive diagnostics © 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Generate heatmap
+        const heatmapGrid = document.querySelector('.heatmap-grid');
+        const concepts = ['F=ma', 'Vectors', 'Kinematics', 'Energy', 'Forces', 'Circuits', 'Waves'];
+        
+        concepts.forEach(concept => {
+            const cell = document.createElement('div');
+            const fractureRate = Math.floor(Math.random() * 100);
+            
+            let bgColor;
+            if (fractureRate <= 20) bgColor = '#00ff88';
+            else if (fractureRate <= 40) bgColor = '#ffaa00';
+            else if (fractureRate <= 60) bgColor = '#ff6b6b';
+            else bgColor = '#cc0000';
+            
+            cell.className = 'heatmap-cell';
+            cell.style.background = bgColor;
+            cell.textContent = concept;
+            cell.title = `${fractureRate}% of students fracture on ${concept}`;
+            
+            heatmapGrid.appendChild(cell);
+        });
+
+        // Progress Radar Chart
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Conceptual Understanding', 'Procedural Fluency', 'Reasoning Chain', 'Error Analysis', 'Self-Correction', 'Transfer Ability'],
+                datasets: [{
+                    label: 'Class Average',
+                    data: [85, 92, 78, 88, 82, 76],
+                    backgroundColor: 'rgba(0, 245, 255, 0.2)',
+                    borderColor: 'rgba(0, 245, 255, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(0, 245, 255, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(0, 245, 255, 1)'
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        angleLines: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        pointLabels: {
+                            color: 'rgba(255, 255, 255, 0.8)',
+                            font: {
+                                size: 11
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                elements: {
+                    line: {
+                        tension: 0.4
+                    }
+                }
+            }
+        });
+
+        // Animate dashboard cards on scroll
+        gsap.utils.toArray('.dashboard-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    once: true
+                },
+                duration: 0.8,
+                y: 30,
+                opacity: 0,
+                delay: i * 0.1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Export button animation
+        document.querySelectorAll('.export-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('featured')) {
+                    // Simulate PDF generation
+                    const originalHTML = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating Report...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-check"></i> Report Generated!';
+                        this.style.background = 'rgba(0, 255, 136, 0.2)';
+                        this.style.borderColor = '#00ff88';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalHTML;
+                            this.disabled = false;
+                            this.style.background = '';
+                            this.style.borderColor = '';
+                        }, 2000);
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

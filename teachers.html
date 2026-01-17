@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Teachers - Insight Illuminators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .teachers-hero {
+            text-align: center;
+            padding: 120px 6% 60px;
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.05));
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 60px;
+        }
+        
+        .teacher-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0 60px;
+        }
+        
+        .teacher-stat {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+        
+        .teacher-stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(0,245,255,0.2);
+        }
+        
+        .teacher-stat i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-blue);
+        }
+        
+        .teacher-stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .teacher-stat-label {
+            font-size: 0.95rem;
+            color: var(--text-tertiary);
+        }
+        
+        .personas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .persona-card {
+            padding: 0;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+        
+        .persona-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .persona-header {
+            padding: 30px 30px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.1));
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .persona-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--dark-bg);
+            border: 4px solid rgba(255,255,255,0.1);
+        }
+        
+        .persona-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .persona-role {
+            color: var(--secondary-blue);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .persona-location {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+        
+        .persona-content {
+            padding: 30px;
+        }
+        
+        .persona-challenge {
+            padding: 15px;
+            background: rgba(255,107,107,0.1);
+            border-radius: 12px;
+            border-left: 4px solid #ff6b6b;
+            margin-bottom: 20px;
+        }
+        
+        .persona-challenge h4 {
+            color: #ff6b6b;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .persona-solution {
+            padding: 15px;
+            background: rgba(0,255,136,0.1);
+            border-radius: 12px;
+            border-left: 4px solid #00ff88;
+            margin-bottom: 20px;
+        }
+        
+        .persona-solution h4 {
+            color: #00ff88;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .workflow-steps {
+            margin: 20px 0;
+        }
+        
+        .workflow-step {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0,245,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-blue);
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        
+        .persona-cta {
+            margin-top: 20px;
+        }
+        
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 60px auto;
+            position: relative;
+        }
+        
+        .testimonial-slide {
+            padding: 40px;
+            text-align: center;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .testimonial-slide.active {
+            display: block;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--dark-bg);
+        }
+        
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-role {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .carousel-dot.active {
+            background: var(--secondary-blue);
+            transform: scale(1.2);
+        }
+        
+        .integration-section {
+            margin-top: 80px;
+        }
+        
+        .integration-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .integration-card {
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .integration-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .integration-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+        }
+        
+        .get-started-section {
+            margin-top: 80px;
+            text-align: center;
+        }
+        
+        .get-started-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .get-started-step {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            Insight Illuminators
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tour.html">Product</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="teachers.html" class="active">Teachers</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="blog.html">Blog</a>
+            <a href="#" class="btn-login">Login</a>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="mobile-menu glass">
+        <a href="index.html">Home</a>
+        <a href="tour.html">Product</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="teachers.html" class="active">Teachers</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="blog.html">Blog</a>
+        <a href="#" class="btn-login">Login</a>
+    </div>
+
+    <section class="teachers-hero">
+        <h1>Built for Teachers, by Teachers</h1>
+        <p class="section-subtitle">Join 500+ educators worldwide who are transforming how they understand student thinking</p>
+        <p>Insight Illuminators gives you the language and tools to diagnose reasoning fractures you could only sense before.</p>
+    </section>
+
+    <section>
+        <div class="teacher-stats">
+            <div class="teacher-stat glass">
+                <i class="fas fa-user-graduate"></i>
+                <div class="teacher-stat-value">12K+</div>
+                <div class="teacher-stat-label">Students Analyzed</div>
+            </div>
+            
+            <div class="teacher-stat glass">
+                <i class="fas fa-chart-line"></i>
+                <div class="teacher-stat-value">2.8x</div>
+                <div class="teacher-stat-label">Faster Concept Mastery</div>
+            </div>
+            
+            <div class="teacher-stat glass">
+                <i class="fas fa-users"></i>
+                <div class="teacher-stat-value">91%</div>
+                <div class="teacher-stat-label">Teacher Retention Rate</div>
+            </div>
+            
+            <div class="teacher-stat glass">
+                <i class="fas fa-bolt"></i>
+                <div class="teacher-stat-value">94%</div>
+                <div class="teacher-stat-label">Gap Detection Accuracy</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Teacher Personas</h2>
+        <p class="section-subtitle">See how different educators use Insight Illuminators in their unique contexts</p>
+        
+        <div class="personas-grid">
+            <!-- Persona 1: Urban Physics Coach -->
+            <div class="persona-card glass">
+                <div class="persona-header">
+                    <div class="persona-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="persona-name">Rajesh Kumar</div>
+                    <div class="persona-role">Urban Physics Coach</div>
+                    <div class="persona-location">Mumbai International School</div>
+                </div>
+                
+                <div class="persona-content">
+                    <div class="persona-challenge">
+                        <h4>Challenge</h4>
+                        <p>Large class sizes (45+ students), limited time for individual feedback, preparing students for national competitions.</p>
+                    </div>
+                    
+                    <div class="persona-solution">
+                        <h4>How Insight Illuminators Helps</h4>
+                        <p>"Finally see exactly where each student loses the thread. 3x faster concept mastery with targeted interventions."</p>
+                    </div>
+                    
+                    <div class="workflow-steps">
+                        <h4>Weekly Workflow</h4>
+                        <div class="workflow-step">
+                            <div class="step-icon">1</div>
+                            <div>
+                                <strong>Monday:</strong> Upload student problem sets
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">2</div>
+                            <div>
+                                <strong>Tuesday:</strong> Review fracture reports, identify class patterns
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">3</div>
+                            <div>
+                                <strong>Wednesday:</strong> Group students by misconception type
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">4</div>
+                            <div>
+                                <strong>Thursday:</strong> Targeted mini-lessons for each group
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="persona-cta">
+                        <button class="cta secondary" style="width: 100%;">
+                            <i class="fas fa-video"></i>
+                            Watch Rajesh's Workflow
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Persona 2: Rural Math Specialist -->
+            <div class="persona-card glass">
+                <div class="persona-header">
+                    <div class="persona-avatar">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="persona-name">Priya Sharma</div>
+                    <div class="persona-role">Rural Math Specialist</div>
+                    <div class="persona-location">Village STEM Initiative</div>
+                </div>
+                
+                <div class="persona-content">
+                    <div class="persona-challenge">
+                        <h4>Challenge</h4>
+                        <p>Teaching multiple grades (6-10), limited resources, students with diverse learning gaps, no access to specialist tutors.</p>
+                    </div>
+                    
+                    <div class="persona-solution">
+                        <h4>How Insight Illuminators Helps</h4>
+                        <p>"Names misconceptions like 'unit blindness' that I never had language for. Students finally understand their own thinking gaps."</p>
+                    </div>
+                    
+                    <div class="workflow-steps">
+                        <h4>Key Features Used</h4>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div>
+                                <strong>Local Language Support:</strong> Hindi and Marathi interface
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-print"></i>
+                            </div>
+                            <div>
+                                <strong>Offline Reports:</strong> PDF exports for areas with poor internet
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Voice Mode:</strong> Students explain reasoning aloud
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="persona-cta">
+                        <button class="cta secondary" style="width: 100%;">
+                            <i class="fas fa-download"></i>
+                            Download Rural Toolkit
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Persona 3: Competition Prep Tutor -->
+            <div class="persona-card glass">
+                <div class="persona-header">
+                    <div class="persona-avatar">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="persona-name">Dr. Arjun Mehta</div>
+                    <div class="persona-role">Competition Prep Tutor</div>
+                    <div class="persona-location">STEM Excellence Academy</div>
+                </div>
+                
+                <div class="persona-content">
+                    <div class="persona-challenge">
+                        <h4>Challenge</h4>
+                        <p>Preparing students for IIT-JEE, Olympiads, and international competitions. Need to identify subtle reasoning flaws that separate top performers.</p>
+                    </div>
+                    
+                    <div class="persona-solution">
+                        <h4>How Insight Illuminators Helps</h4>
+                        <p>"Most impressive reasoning analysis I've seen in 10+ years of coaching. The misconception naming is revolutionary for competition prep."</p>
+                    </div>
+                    
+                    <div class="workflow-steps">
+                        <h4>Competition Advantage</h4>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <strong>Precision Targeting:</strong> Finds the 2% error that costs perfect scores
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <div>
+                                <strong>Judge-Ready Reports:</strong> Export PDFs that show reasoning depth
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-chart-network"></i>
+                            </div>
+                            <div>
+                                <strong>Pattern Library:</strong> 200+ known competition misconceptions
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="persona-cta">
+                        <button class="cta" style="width: 100%; background: var(--gradient-secondary); color: var(--dark-bg);">
+                            <i class="fas fa-gavel"></i>
+                            Try Competition Mode
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Persona 4: Inclusion Specialist -->
+            <div class="persona-card glass">
+                <div class="persona-header">
+                    <div class="persona-avatar">
+                        <i class="fas fa-universal-access"></i>
+                    </div>
+                    <div class="persona-name">Anjali Patel</div>
+                    <div class="persona-role">Inclusion Specialist</div>
+                    <div class="persona-location">Inclusive Learning Center</div>
+                </div>
+                
+                <div class="persona-content">
+                    <div class="persona-challenge">
+                        <h4>Challenge</h4>
+                        <p>Supporting dyslexic students, English language learners, and students with different learning styles. Traditional assessments often miss their understanding.</p>
+                    </div>
+                    
+                    <div class="persona-solution">
+                        <h4>How Insight Illuminators Helps</h4>
+                        <p>"Voice mode lets dyslexic students explain reasoning without writing barriers. We finally see their true understanding."</p>
+                    </div>
+                    
+                    <div class="workflow-steps">
+                        <h4>Inclusion Features</h4>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <div>
+                                <strong>Voice Reasoning:</strong> Students explain aloud, AI transcribes and analyzes
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div>
+                                <strong>Multilingual Support:</strong> Analyze reasoning in native language
+                            </div>
+                        </div>
+                        <div class="workflow-step">
+                            <div class="step-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div>
+                                <strong>Visual Reasoning:</strong> Upload diagrams and sketches
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="persona-cta">
+                        <button class="cta secondary" style="width: 100%;">
+                            <i class="fas fa-universal-access"></i>
+                            Explore Inclusion Features
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-carousel">
+        <h2>Teacher Testimonials</h2>
+        <p class="section-subtitle">Hear from educators using Insight Illuminators in their classrooms</p>
+        
+        <div class="testimonial-slide active">
+            <div class="testimonial-avatar">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div class="testimonial-text">
+                "For the first time, I can see exactly which mental step each student misses. It's like having X-ray vision for student thinking."
+            </div>
+            <div class="testimonial-author">Sanjay Verma</div>
+            <div class="testimonial-role">Physics Teacher, Delhi Public School</div>
+        </div>
+        
+        <div class="testimonial-slide">
+            <div class="testimonial-avatar">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="testimonial-text">
+                "The misconception naming gives me language I never had. Instead of 'you're wrong', I can say 'you have unit blindness—let's fix that specific gap'."
+            </div>
+            <div class="testimonial-author">Meena Kapoor</div>
+            <div class="testimonial-role">Math Department Head, Bangalore</div>
+        </div>
+        
+        <div class="testimonial-slide">
+            <div class="testimonial-avatar">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="testimonial-text">
+                "My competition students are improving 3x faster. We target their exact reasoning fractures instead of generic practice problems."
+            </div>
+            <div class="testimonial-author">Dr. Ravi Singh</div>
+            <div class="testimonial-role">IIT-JEE Coach, Kota</div>
+        </div>
+        
+        <div class="carousel-controls">
+            <div class="carousel-dot active" data-slide="0"></div>
+            <div class="carousel-dot" data-slide="1"></div>
+            <div class="carousel-dot" data-slide="2"></div>
+        </div>
+    </section>
+
+    <section class="integration-section">
+        <h2>Fits Your Existing Workflow</h2>
+        <p class="section-subtitle">Works with the tools you already use</p>
+        
+        <div class="integration-cards">
+            <div class="integration-card glass">
+                <div class="integration-icon">
+                    <i class="fab fa-google"></i>
+                </div>
+                <h3>Google Classroom</h3>
+                <p>Direct integration with assignments and student submissions</p>
+            </div>
+            
+            <div class="integration-card glass">
+                <div class="integration-icon">
+                    <i class="fab fa-microsoft"></i>
+                </div>
+                <h3>Microsoft Teams</h3>
+                <p>Seamless workflow for schools using Microsoft ecosystem</p>
+            </div>
+            
+            <div class="integration-card glass">
+                <div class="integration-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Canvas LMS</h3>
+                <p>Full LTI integration with gradebook sync</p>
+            </div>
+            
+            <div class="integration-card glass">
+                <div class="integration-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3>PDF/Photos</h3>
+                <p>Upload handwritten work, diagrams, or typed solutions</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="get-started-section">
+        <h2>Get Started in 3 Simple Steps</h2>
+        <p class="section-subtitle">Join 500+ teachers already illuminating student thinking</p>
+        
+        <div class="get-started-steps">
+            <div class="get-started-step glass">
+                <div class="step-number">1</div>
+                <h3>Start Free Pilot</h3>
+                <p>Sign up for our 14-day Pro trial. No credit card required.</p>
+            </div>
+            
+            <div class="get-started-step glass">
+                <div class="step-number">2</div>
+                <h3>Upload First Assignment</h3>
+                <p>Try with 5-10 student submissions. See fractures in minutes.</p>
+            </div>
+            
+            <div class="get-started-step glass">
+                <div class="step-number">3</div>
+                <h3>Get Class Insights</h3>
+                <p>View heatmaps, top misconceptions, and next actions.</p>
+            </div>
+        </div>
+        
+        <div class="cta-buttons">
+            <button class="cta" onclick="window.location.href='pricing.html'">
+                <i class="fas fa-rocket"></i>
+                Start Free Pilot
+            </button>
+            <button class="cta secondary" onclick="window.location.href='tour.html'">
+                <i class="fas fa-play-circle"></i>
+                Watch Teacher Demo
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    Insight Illuminators
+                </div>
+                <p class="footer-tagline">Made in Mumbai · Serving 12K+ students globally</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="tour.html">Tour</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="use-cases.html">Use Cases</a>
+                <a href="teachers.html">Teachers</a>
+                <a href="integrations.html">Integrations</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="blog.html">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Insight Illuminators · Exposing Hidden Thought Fractures · Precision cognitive diagnostics © 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Testimonial carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        // Auto-advance carousel
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Dot click handlers
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // Animate persona cards on scroll
+        gsap.utils.toArray('.persona-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    once: true
+                },
+                duration: 0.8,
+                y: 40,
+                opacity: 0,
+                delay: i * 0.15,
+                ease: 'power3.out'
+            });
+        });
+        
+        // Animate integration cards
+        gsap.utils.toArray('.integration-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    once: true
+                },
+                duration: 0.6,
+                scale: 0.9,
+                opacity: 0,
+                delay: i * 0.1,
+                ease: 'back.out(1.2)'
+            });
+        });
+        
+        // Animate get started steps
+        gsap.utils.toArray('.get-started-step').forEach((step, i) => {
+            gsap.from(step, {
+                scrollTrigger: {
+                    trigger: step,
+                    start: 'top 95%',
+                    once: true
+                },
+                duration: 0.7,
+                y: 30,
+                opacity: 0,
+                delay: i * 0.2,
+                ease: 'power3.out'
+            });
+        });
+    </script>
+</body>
+</html>

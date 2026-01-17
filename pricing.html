@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Insight Illuminators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pricing-hero {
+            text-align: center;
+            padding: 120px 6% 60px;
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.05));
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0 50px;
+            align-items: center;
+        }
+        
+        .toggle-btn {
+            padding: 12px 30px;
+            border-radius: 999px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.03);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .toggle-btn.active {
+            background: var(--gradient-secondary);
+            color: var(--dark-bg);
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(0,245,255,0.3);
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .pricing-table th, .pricing-table td {
+            padding: 25px 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .pricing-table th {
+            background: rgba(0,245,255,0.1);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .pricing-table thead th:first-child {
+            background: transparent;
+            text-align: left;
+        }
+        
+        .pricing-table tbody tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .pricing-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .feature-check {
+            color: #00ff88;
+            font-size: 1.2rem;
+        }
+        
+        .feature-cross {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+        }
+        
+        .plan-header {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .plan-popular {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-secondary);
+            color: var(--dark-bg);
+            padding: 8px 20px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .plan-price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 10px 0;
+        }
+        
+        .plan-period {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+        
+        .plan-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+        
+        .pricing-cards {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .pricing-card {
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(0,245,255,0.12), rgba(102,126,234,0.16));
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .pricing-card li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pricing-card li i {
+            width: 20px;
+        }
+        
+        .trial-banner {
+            background: var(--gradient-secondary);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .trial-banner h3 {
+            color: var(--dark-bg);
+            margin-bottom: 10px;
+        }
+        
+        .trial-banner p {
+            color: rgba(5,7,18,0.8);
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .school-pilot {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 40px 0;
+        }
+        
+        .faq-section {
+            margin-top: 80px;
+        }
+        
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .faq-item {
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item.active {
+            background: rgba(0,245,255,0.1);
+            border-color: rgba(0,245,255,0.3);
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-table {
+                display: none;
+            }
+            
+            .pricing-cards {
+                display: grid;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .pricing-toggle {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            Insight Illuminators
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tour.html">Product</a>
+            <a href="pricing.html" class="active">Pricing</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="blog.html">Blog</a>
+            <a href="#" class="btn-login">Login</a>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="mobile-menu glass">
+        <a href="index.html">Home</a>
+        <a href="tour.html">Product</a>
+        <a href="pricing.html" class="active">Pricing</a>
+        <a href="teachers.html">Teachers</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="blog.html">Blog</a>
+        <a href="#" class="btn-login">Login</a>
+    </div>
+
+    <section class="pricing-hero">
+        <h1>Simple, Transparent Pricing</h1>
+        <p class="section-subtitle">Choose the perfect plan for your classroom, school, or institution</p>
+        
+        <div class="pricing-toggle">
+            <span>Billed Monthly</span>
+            <div style="display: flex; align-items: center;">
+                <button class="toggle-btn active" data-period="monthly">Monthly</button>
+                <button class="toggle-btn" data-period="yearly">Yearly <span style="background: #00ff88; color: var(--dark-bg); padding: 2px 8px; border-radius: 999px; font-size: 0.7rem; margin-left: 5px;">Save 20%</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <table class="pricing-table glass">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>
+                        <div class="plan-header">
+                            <h3>Free</h3>
+                            <div class="plan-price">$0</div>
+                            <div class="plan-period">Forever free</div>
+                            <p class="plan-description">Perfect for trying out fracture analysis</p>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="plan-header">
+                            <h3>Pro</h3>
+                            <div class="plan-price monthly-price">$29</div>
+                            <div class="plan-price yearly-price" style="display: none;">$23<span style="font-size: 1.5rem;">/mo</span></div>
+                            <div class="plan-period monthly-period">Per teacher / month</div>
+                            <div class="plan-period yearly-period" style="display: none;">Per teacher / year ($276)</div>
+                            <p class="plan-description">Everything you need for daily classroom use</p>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="plan-header">
+                            <h3>School</h3>
+                            <div class="plan-price">$199+</div>
+                            <div class="plan-period">Per institution / month</div>
+                            <p class="plan-description">Custom deployment for your school or district</p>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Students / month</td>
+                    <td>50</td>
+                    <td>Unlimited</td>
+                    <td>Unlimited</td>
+                </tr>
+                <tr>
+                    <td>Subjects Covered</td>
+                    <td>Math / Physics only</td>
+                    <td>All STEM subjects</td>
+                    <td>Custom subjects</td>
+                </tr>
+                <tr>
+                    <td>Voice Analysis</td>
+                    <td><i class="fas fa-times feature-cross"></i></td>
+                    <td><i class="fas fa-check feature-check"></i></td>
+                    <td><i class="fas fa-check feature-check"></i></td>
+                </tr>
+                <tr>
+                    <td>Class Reports</td>
+                    <td><i class="fas fa-times feature-cross"></i></td>
+                    <td><i class="fas fa-check feature-check"></i></td>
+                    <td><i class="fas fa-check feature-check"></i></td>
+                </tr>
+                <tr>
+                    <td>SSO Integration</td>
+                    <td><i class="fas fa-times feature-cross"></i></td>
+                    <td><i class="fas fa-times feature-cross"></i></td>
+                    <td><i class="fas fa-check feature-check"></i></td>
+                </tr>
+                <tr>
+                    <td>Priority Support</td>
+                    <td>Email only</td>
+                    <td>24-hour response</td>
+                    <td>Dedicated engineer</td>
+                </tr>
+                <tr>
+                    <td>PDF Export</td>
+                    <td>Limited (5/month)</td>
+                    <td>Unlimited</td>
+                    <td>Unlimited + Custom branding</td>
+                </tr>
+                <tr>
+                    <td>API Access</td>
+                    <td><i class="fas fa-times feature-cross"></i></td>
+                    <td>Limited</td>
+                    <td>Full access</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="cta secondary" style="width: 100%;">Start Free</button></td>
+                    <td><button class="cta" style="width: 100%; background: var(--gradient-secondary); color: var(--dark-bg);">Start 14-day Trial</button></td>
+                    <td><button class="cta secondary" style="width: 100%;">Contact Sales</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Mobile Pricing Cards -->
+        <div class="pricing-cards">
+            <div class="pricing-card glass">
+                <h3>Free</h3>
+                <div class="plan-price">$0</div>
+                <div class="plan-period">Forever free</div>
+                <p class="plan-description">Perfect for trying out fracture analysis</p>
+                
+                <ul>
+                    <li><i class="fas fa-check feature-check"></i> 50 students/month</li>
+                    <li><i class="fas fa-check feature-check"></i> Math/Physics only</li>
+                    <li><i class="fas fa-times feature-cross"></i> Voice Analysis</li>
+                    <li><i class="fas fa-times feature-cross"></i> Class Reports</li>
+                    <li><i class="fas fa-times feature-cross"></i> PDF Export (limited)</li>
+                </ul>
+                
+                <button class="cta secondary" style="width: 100%;">Start Free</button>
+            </div>
+            
+            <div class="pricing-card glass featured">
+                <div class="plan-popular">Most Popular for Judges</div>
+                <h3>Pro</h3>
+                <div class="plan-price monthly-price">$29</div>
+                <div class="plan-price yearly-price" style="display: none;">$23<span style="font-size: 1.5rem;">/mo</span></div>
+                <div class="plan-period monthly-period">Per teacher / month</div>
+                <div class="plan-period yearly-period" style="display: none;">Per teacher / year ($276)</div>
+                <p class="plan-description">Everything you need for daily classroom use</p>
+                
+                <ul>
+                    <li><i class="fas fa-check feature-check"></i> Unlimited students</li>
+                    <li><i class="fas fa-check feature-check"></i> All STEM subjects</li>
+                    <li><i class="fas fa-check feature-check"></i> Voice Analysis</li>
+                    <li><i class="fas fa-check feature-check"></i> Class Reports</li>
+                    <li><i class="fas fa-check feature-check"></i> Unlimited PDF Export</li>
+                    <li><i class="fas fa-check feature-check"></i> 24-hour support</li>
+                </ul>
+                
+                <button class="cta" style="width: 100%; background: var(--gradient-secondary); color: var(--dark-bg);">Start 14-day Trial</button>
+            </div>
+            
+            <div class="pricing-card glass">
+                <h3>School</h3>
+                <div class="plan-price">$199+</div>
+                <div class="plan-period">Per institution / month</div>
+                <p class="plan-description">Custom deployment for your school or district</p>
+                
+                <ul>
+                    <li><i class="fas fa-check feature-check"></i> School-wide deployment</li>
+                    <li><i class="fas fa-check feature-check"></i> Custom subjects</li>
+                    <li><i class="fas fa-check feature-check"></i> SSO Integration</li>
+                    <li><i class="fas fa-check feature-check"></i> Dedicated support</li>
+                    <li><i class="fas fa-check feature-check"></i> Custom branding</li>
+                    <li><i class="fas fa-check feature-check"></i> Full API access</li>
+                </ul>
+                
+                <button class="cta secondary" style="width: 100%;">Contact Sales</button>
+            </div>
+        </div>
+
+        <div class="trial-banner">
+            <h3>14-Day Pro Trial - No Credit Card Required</h3>
+            <p>Experience full fracture analysis, voice reasoning ingestion, and unlimited PDF exports for two weeks. Perfect for competition preparation and judge demonstrations.</p>
+            <button class="cta" style="background: var(--dark-bg); color: white; border: none;">
+                <i class="fas fa-rocket"></i>
+                Start Your Free Trial
+            </button>
+        </div>
+
+        <div class="school-pilot">
+            <h3 style="text-align: center; margin-bottom: 20px;">School Pilot Program</h3>
+            <p style="text-align: center; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Join 500+ schools already piloting Insight Illuminators. Get custom deployment, dedicated training, and volume discounts for your institution.
+            </p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary-blue);">50%</div>
+                    <div style="color: var(--text-tertiary);">Discount for first 3 months</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary-blue);">Free</div>
+                    <div style="color: var(--text-tertiary);">Teacher training sessions</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 800; color: var(--secondary-blue);">Custom</div>
+                    <div style="color: var(--text-tertiary);">Integration with your LMS</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="cta secondary">
+                    <i class="fas fa-school"></i>
+                    Request Pilot Program Details
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about our pricing and plans</p>
+        
+        <div class="faq-grid">
+            <div class="faq-item glass">
+                <div class="faq-question">
+                    What's included in the 14-day Pro trial?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    The trial includes all Pro features: unlimited student analysis, voice reasoning ingestion, class reports, PDF exports, and access to all STEM subjects. No credit card required.
+                </div>
+            </div>
+            
+            <div class="faq-item glass">
+                <div class="faq-question">
+                    Can I upgrade from Free to Pro?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes! Your data and analysis history will be preserved when you upgrade. We offer prorated billing when upgrading mid-month.
+                </div>
+            </div>
+            
+            <div class="faq-item glass">
+                <div class="faq-question">
+                    Do you offer discounts for educational institutions?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Absolutely. We offer 50% off for the first 3 months of any School plan, plus volume discounts for district-wide deployments. Contact our sales team for custom quotes.
+                </div>
+            </div>
+            
+            <div class="faq-item glass">
+                <div class="faq-question">
+                    What payment methods do you accept?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for School plans. All payments are secure and encrypted.
+                </div>
+            </div>
+            
+            <div class="faq-item glass">
+                <div class="faq-question">
+                    Can I cancel anytime?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period. No hidden fees or cancellation charges.
+                </div>
+            </div>
+            
+            <div class="faq-item glass">
+                <div class="faq-question">
+                    Is my student data secure?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We take data security seriously. All data is encrypted in transit and at rest. We comply with FERPA and GDPR requirements. School plans include additional security features.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container glass">
+            <h2>Ready to Illuminate Thought Fractures?</h2>
+            <p>Join 12,000+ students and 500+ teachers already using Insight Illuminators</p>
+            <div class="cta-buttons">
+                <button class="cta" onclick="window.location.href='index.html#demo'">
+                    <i class="fas fa-bolt"></i>
+                    Try Free Demo
+                </button>
+                <button class="cta secondary" onclick="window.location.href='tour.html'">
+                    <i class="fas fa-play-circle"></i>
+                    Watch Product Tour
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    Insight Illuminators
+                </div>
+                <p class="footer-tagline">Made in Mumbai · Serving 12K+ students globally</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="tour.html">Tour</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="use-cases.html">Use Cases</a>
+                <a href="teachers.html">Teachers</a>
+                <a href="integrations.html">Integrations</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="blog.html">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Insight Illuminators · Exposing Hidden Thought Fractures · Precision cognitive diagnostics © 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Pricing toggle functionality
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const period = this.dataset.period;
+                
+                if (period === 'yearly') {
+                    // Show yearly prices
+                    document.querySelectorAll('.monthly-price, .monthly-period').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                    document.querySelectorAll('.yearly-price, .yearly-period').forEach(el => {
+                        el.style.display = 'block';
+                    });
+                } else {
+                    // Show monthly prices
+                    document.querySelectorAll('.monthly-price, .monthly-period').forEach(el => {
+                        el.style.display = 'block';
+                    });
+                    document.querySelectorAll('.yearly-price, .yearly-period').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                }
+            });
+        });
+        
+        // FAQ accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const isActive = this.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-question i').className = 'fas fa-chevron-down';
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    this.classList.add('active');
+                    this.querySelector('.faq-question i').className = 'fas fa-chevron-up';
+                }
+            });
+        });
+        
+        // Animate pricing table on scroll
+        gsap.from('.pricing-table, .pricing-cards', {
+            scrollTrigger: {
+                trigger: '.pricing-section',
+                start: 'top 80%',
+                once: true
+            },
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+    </script>
+</body>
+</html>

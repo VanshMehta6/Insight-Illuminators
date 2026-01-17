@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Tour - Insight Illuminators</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Tour page specific styles */
+        .tour-hero {
+            text-align: center;
+            padding: 120px 6% 60px;
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.05));
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 60px;
+        }
+        
+        .timer-animation {
+            font-size: 4rem;
+            font-weight: 800;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 30px 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .timer-animation::after {
+            content: 'seconds to first insight';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            white-space: nowrap;
+        }
+        
+        .tour-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .tour-step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 30px;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, var(--secondary-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .step-demo {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .step-demo img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .tour-cta {
+            text-align: center;
+            margin: 80px 0 40px;
+        }
+        
+        .tour-cta .cta {
+            margin: 0 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .tour-step {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            
+            .step-number {
+                margin: 0 auto;
+            }
+            
+            .timer-animation {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            Insight Illuminators
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="tour.html" class="active">Product</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="blog.html">Blog</a>
+            <a href="#" class="btn-login">Login</a>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="mobile-menu glass">
+        <a href="index.html">Home</a>
+        <a href="tour.html" class="active">Product</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="teachers.html">Teachers</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="blog.html">Blog</a>
+        <a href="#" class="btn-login">Login</a>
+    </div>
+
+    <section class="tour-hero">
+        <h1>Product Tour</h1>
+        <p class="section-subtitle">5-step interactive walkthrough to your first cognitive insight</p>
+        <div class="timer-animation" id="timer">30</div>
+        <p>From student work to actionable insight in under 30 seconds</p>
+    </section>
+
+    <section class="tour-steps">
+        <!-- Step 1 -->
+        <div class="tour-step glass">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Upload Student Work</h3>
+                <p>Simply upload photos of handwritten work, PDFs, or type directly. Our AI handles messy handwriting, diagrams, and even partial solutions.</p>
+                <div class="step-demo">
+                    <!-- In a real implementation, this would be a GIF -->
+                    <div style="background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(102,126,234,0.1)); padding: 40px; border-radius: 12px; text-align: center;">
+                        <i class="fas fa-upload" style="font-size: 3rem; color: var(--secondary-blue); margin-bottom: 20px;"></i>
+                        <p>Drag & drop student work here<br><small>Supports: JPG, PNG, PDF, TXT</small></p>
+                    </div>
+                </div>
+                <button class="cta secondary" style="margin-top: 20px;">
+                    <i class="fas fa-upload"></i>
+                    Try Upload Demo
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="tour-step glass">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>AI Fracture Scan</h3>
+                <p>Our cognitive engine traces each reasoning step, comparing against expert mental models. It identifies exactly where thinking fractures occur.</p>
+                <div class="step-demo">
+                    <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 12px; font-family: monospace;">
+                        <div style="color: #00ff88;">✓ Step 1: Identify formula (F=ma)</div>
+                        <div style="color: #00ff88;">✓ Step 2: Extract values (F=10, m=2)</div>
+                        <div style="color: #ff6b6b;">✗ Step 3: Calculate (10/2=5)</div>
+                        <div style="color: #ffaa00;">⚠ Step 4: Missing unit justification</div>
+                    </div>
+                </div>
+                <button class="cta secondary" style="margin-top: 20px;" onclick="window.location.href='index.html#demo'">
+                    <i class="fas fa-bolt"></i>
+                    Run Live Scan
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="tour-step glass">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Misconception Identification</h3>
+                <p>The system classifies fractures into named misconception patterns: "Unit Blindness", "Velocity-Acceleration Confusion", "Sign Convention Flip", etc.</p>
+                <div class="step-demo">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span style="background: rgba(255,107,107,0.2); color: #ff6b6b; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,107,107,0.3);">Unit Blindness</span>
+                        <span style="background: rgba(255,170,0,0.2); color: #ffaa00; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,170,0,0.3);">V vs A Confusion</span>
+                        <span style="background: rgba(0,245,255,0.2); color: var(--secondary-blue); padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(0,245,255,0.3);">Sign Flip</span>
+                        <span style="background: rgba(102,126,234,0.2); color: var(--accent-blue); padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(102,126,234,0.3);">Ratio Blindness</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="tour-step glass">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h3>Micro-Question Generation</h3>
+                <p>Based on the specific fracture, the AI generates exactly one diagnostic question that probes the core misunderstanding—not a quiz, just surgical insight.</p>
+                <div class="step-demo">
+                    <div class="glass" style="padding: 20px; text-align: center;">
+                        <i class="fas fa-question-circle" style="font-size: 2rem; color: var(--secondary-blue); margin-bottom: 10px;"></i>
+                        <p style="font-style: italic;">"What physical quantity do the units m/s² represent?"</p>
+                        <small style="color: var(--text-tertiary);">This single question reveals if the student understands acceleration vs velocity</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="tour-step glass">
+            <div class="step-number">5</div>
+            <div class="step-content">
+                <h3>Next Action Recommendation</h3>
+                <p>Get one clear instruction: "Reframe with cricket analogy", "Watch 90-second simulation", or "Practice with adjusted numbers".</p>
+                <div class="step-demo">
+                    <div class="glass" style="padding: 20px; background: rgba(0,245,255,0.1); border-left: 4px solid var(--secondary-blue);">
+                        <h4 style="margin-bottom: 10px;">🧭 Next Best Action</h4>
+                        <p><strong>Action:</strong> Watch 90-second simulation of velocity vs acceleration</p>
+                        <p><strong>Why:</strong> Visual comparison will solidify the distinction</p>
+                        <p><strong>Then:</strong> Retry explanation with new mental model</p>
+                    </div>
+                </div>
+                <button class="cta" style="margin-top: 20px;">
+                    <i class="fas fa-compass"></i>
+                    Get Your Next Action
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="tour-cta">
+        <h2>Ready to See It in Action?</h2>
+        <p class="section-subtitle">Experience the full power of cognitive fracture analysis</p>
+        <div>
+            <button class="cta" onclick="window.location.href='index.html#demo'">
+                <i class="fas fa-bolt"></i>
+                Try Live Demo
+            </button>
+            <button class="cta secondary" onclick="window.location.href='pricing.html'">
+                <i class="fas fa-rocket"></i>
+                Start Free Pilot
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    Insight Illuminators
+                </div>
+                <p class="footer-tagline">Made in Mumbai · Serving 12K+ students globally</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="tour.html">Tour</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="use-cases.html">Use Cases</a>
+                <a href="teachers.html">Teachers</a>
+                <a href="integrations.html">Integrations</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="blog.html">Blog</a>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Insight Illuminators · Exposing Hidden Thought Fractures · Precision cognitive diagnostics © 2026</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Timer animation for tour page
+        let timer = 30;
+        const timerElement = document.getElementById('timer');
+        
+        function updateTimer() {
+            if (timer > 0) {
+                timer -= 0.1;
+                timerElement.textContent = timer.toFixed(1);
+            }
+        }
+        
+        setInterval(updateTimer, 100);
+        
+        // Animate steps on scroll
+        gsap.utils.toArray('.tour-step').forEach((step, i) => {
+            gsap.from(step, {
+                scrollTrigger: {
+                    trigger: step,
+                    start: 'top 80%',
+                    once: true
+                },
+                duration: 0.8,
+                y: 40,
+                opacity: 0,
+                delay: i * 0.1,
+                ease: 'power3.out'
+            });
+        });
+    </script>
+</body>
+</html>
